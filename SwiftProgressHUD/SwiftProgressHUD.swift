@@ -18,54 +18,54 @@ public enum NoticeType{
 
 public class SwiftProgressHUD {
     
-    static var hudBackgroundColor: UIColor = UIColor.clear {
+    static public var hudBackgroundColor: UIColor = UIColor.clear {
         didSet{
         SwiftNotice.hudBackgroundColor = hudBackgroundColor
         }
     }
     
     /// 动画图片数组
-    @discardableResult class func showPleaseWaitWithImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
+    @discardableResult public class func showPleaseWaitWithImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
         return SwiftNotice.wait(imageNames, timeInterval: timeInterval)
     }
     
     /// 顶部提示
-    @discardableResult class func showTop(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1) -> UIWindow{
+    @discardableResult public class func showTop(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1) -> UIWindow{
         return SwiftNotice.noticeOnStatusBar(text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 成功
-    @discardableResult class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+    @discardableResult public class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
         return SwiftNotice.showNoticeWithText(NoticeType.success, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 错误
-    @discardableResult class func showError(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+    @discardableResult public class func showError(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
         return SwiftNotice.showNoticeWithText(NoticeType.error, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 提示信息
-    @discardableResult class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+    @discardableResult public class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
         return SwiftNotice.showNoticeWithText(NoticeType.info, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 提示
-    @discardableResult class func show(_ text: String, type: NoticeType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow{
+    @discardableResult public class func show(_ text: String, type: NoticeType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow{
         return SwiftNotice.showNoticeWithText(type, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 等待
-    @discardableResult class func showPleaseWait() -> UIWindow{
+    @discardableResult public class func showPleaseWait() -> UIWindow{
         return SwiftNotice.wait()
     }
     
     /// 只显示文字
-    @discardableResult class func showOnlyText(_ text: String) -> UIWindow{
+    @discardableResult public class func showOnlyText(_ text: String) -> UIWindow{
         return SwiftNotice.showText(text)
     }
     
     /// 清除所有
-    class func hideAllHUD() {
+    public class func hideAllHUD() {
         SwiftNotice.clear()
     }
 }
