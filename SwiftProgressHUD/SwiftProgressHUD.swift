@@ -18,7 +18,7 @@ public enum NoticeType{
 
 public class SwiftProgressHUD {
     
-    static var hudBackgroundColor: UIColor = UIColor.lightGray {
+    static var hudBackgroundColor: UIColor = UIColor.clear {
         didSet{
         SwiftNotice.hudBackgroundColor = hudBackgroundColor
         }
@@ -72,7 +72,7 @@ public class SwiftProgressHUD {
 
 class SwiftNotice: NSObject {
     
-    static var hudBackgroundColor: UIColor = UIColor.lightGray
+    static var hudBackgroundColor: UIColor = UIColor.clear
     static var windows = Array<UIWindow!>()
     static let rv = UIApplication.shared.keyWindow?.subviews.first as UIView!
     static var timer: DispatchSource!
@@ -184,9 +184,9 @@ class SwiftNotice: NSObject {
             mainView.addSubview(ai)
         }
         
-        window.frame = frame
+        window.frame = rv!.bounds
         mainView.frame = frame
-        window.center = rv!.center
+        mainView.center = rv!.center
         
         if let version = Double(UIDevice.current.systemVersion),
             version < 9.0 {
@@ -227,11 +227,12 @@ class SwiftNotice: NSObject {
         mainView.addSubview(label)
         
         let superFrame = CGRect(x: 0, y: 0, width: label.frame.width + 50 , height: label.frame.height + 30)
-        window.frame = superFrame
+        
+        window.frame = rv!.bounds
         mainView.frame = superFrame
         
         label.center = mainView.center
-        window.center = rv!.center
+        mainView.center = rv!.center
         
         if let version = Double(UIDevice.current.systemVersion),
             version < 9.0 {
@@ -282,9 +283,9 @@ class SwiftNotice: NSObject {
         label.textAlignment = NSTextAlignment.center
         mainView.addSubview(label)
         
-        window.frame = frame
+        window.frame = rv!.bounds
         mainView.frame = frame
-        window.center = rv!.center
+        mainView.center = rv!.center
         
         if let version = Double(UIDevice.current.systemVersion),
             version < 9.0 {

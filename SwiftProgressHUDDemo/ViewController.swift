@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        SwiftProgressHUD.showSuccess("成功")
+        SwiftProgressHUD.hudBackgroundColor = UIColor.clear
+        SwiftProgressHUD.showPleaseWait()
     }
     
     
