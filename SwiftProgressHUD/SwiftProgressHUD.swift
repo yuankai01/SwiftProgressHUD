@@ -18,6 +18,12 @@ public enum NoticeType{
 
 public class SwiftProgressHUD {
     
+    static var hudBackgroundColor: UIColor = UIColor.lightGray {
+        didSet{
+        SwiftNotice.hudBackgroundColor = hudBackgroundColor
+        }
+    }
+    
     /// 动画图片数组
     @discardableResult class func showPleaseWaitWithImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
         return SwiftNotice.wait(imageNames, timeInterval: timeInterval)
@@ -66,6 +72,7 @@ public class SwiftProgressHUD {
 
 class SwiftNotice: NSObject {
     
+    static var hudBackgroundColor: UIColor = UIColor.lightGray
     static var windows = Array<UIWindow!>()
     static let rv = UIApplication.shared.keyWindow?.subviews.first as UIView!
     static var timer: DispatchSource!
@@ -150,7 +157,7 @@ class SwiftNotice: NSObject {
     static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeInterval: Int = 0) -> UIWindow {
         let frame = CGRect(x: 0, y: 0, width: 78, height: 78)
         let window = UIWindow()
-        window.backgroundColor = UIColor.clear
+        window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.8)
@@ -204,7 +211,7 @@ class SwiftNotice: NSObject {
     @discardableResult
     static func showText(_ text: String, autoClear: Bool=true, autoClearTime: Int=2) -> UIWindow {
         let window = UIWindow()
-        window.backgroundColor = UIColor.clear
+        window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.8)
@@ -250,7 +257,7 @@ class SwiftNotice: NSObject {
     static func showNoticeWithText(_ type: NoticeType,text: String, autoClear: Bool, autoClearTime: Int) -> UIWindow {
         let frame = CGRect(x: 0, y: 0, width: 90, height: 90)
         let window = UIWindow()
-        window.backgroundColor = UIColor.clear
+        window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 10
         mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.7)
