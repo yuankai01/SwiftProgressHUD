@@ -19,9 +19,12 @@ You will need the latest developer tools in order to build `SwiftProgressHUD`. O
 
 [CocoaPods](http://cocoapods.org) is the recommended way to add `SwiftProgressHUD` to your project.
 
-1. Add a pod entry for `SwiftProgressHUD` to your Podfile `pod 'SwiftProgressHUD'`
-2. Install the pod(s) by running `pod install`.
-3. Include `SwiftProgressHUD` wherever you need it with `import SwiftProgressHUD`.
+1. Add a pod entry for `SwiftProgressHUD` to your Podfile 
+`pod 'SwiftProgressHUD'`
+2. Install the pod(s) by running 
+`pod install`.
+3. Include `SwiftProgressHUD` wherever you need it with 
+`import SwiftProgressHUD`.
 
 ### Carthage
 
@@ -47,7 +50,7 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/wait.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/wait.gif)
 
 加载成功时, 提示可以使用 `showSuccess`, 代码及效果如下:
 
@@ -60,7 +63,7 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/success.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/success.gif)
 
 加载失败时, 提示可以使用 `showFail`, 代码及效果如下:
 
@@ -73,7 +76,7 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/fail.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/fail.gif)
 
 友情提示信息, 可以使用 `showInfo`, 代码及效果如下:
 
@@ -86,7 +89,7 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/info.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/info.gif)
 
 错误Toast提示信息, 可以使用 `showOnlyText`, 代码及效果如下:
 
@@ -99,7 +102,7 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/text.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/text.gif)
 
 状态栏提示信息, 可以使用 `showOnStatusBar`, 代码及效果如下:
 
@@ -113,7 +116,7 @@ SwiftProgressHUD.hideAllHUD()
 
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/status.gif =100x59)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/status.gif)
 
 加载动画提示, 可以使用 `showAnimationImages`, 代码及效果如下:
 
@@ -136,8 +139,8 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-[![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/clearAnimation.gif =100x59)]
-[![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/bgAnimation.gif =1100x59)]
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/clearAnimation.gif)
+![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/bgAnimation.gif)
 
 ## License
 
