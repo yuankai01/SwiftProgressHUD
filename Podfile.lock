@@ -1,0 +1,19 @@
+PODS:
+  - CommonParameter (0.0.4)
+  - YJSwiftExtensions (0.0.1):
+    - YJSwiftExtensions/Foundation (= 0.0.1)
+    - YJSwiftExtensions/UIKit (= 0.0.1)
+  - YJSwiftExtensions/Foundation (0.0.1)
+  - YJSwiftExtensions/UIKit (0.0.1)
+
+DEPENDENCIES:
+  - CommonParameter
+  - YJSwiftExtensions
+
+SPEC CHECKSUMS:
+  CommonParameter: 32a6fe771188fce8f7f37671e7aeae6b6804e4ea
+  YJSwiftExtensions: 245828d255b437d4960240ea77a4468cb3992ecd
+
+PODFILE CHECKSUM: 39e88b7c7d94687ce517ed00cc6a9714b2a164a6
+
+COCOAPODS: 1.2.1

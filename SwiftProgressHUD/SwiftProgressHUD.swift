@@ -8,69 +8,82 @@
 
 import UIKit
 
-private let sn_topBar: Int = 1001
+private let yj_topBarTag: Int = 1001
 
-public enum NoticeType{
-    case success
-    case error
-    case info
+/// 显示类型
+public enum SwiftProgressHUDType{
+    case success    // 成功
+    case fail       // 失败
+    case info       // 圈感叹号
 }
 
+//------------------------------------ API START -------------------------------------
 public class SwiftProgressHUD {
     
+    /// 设置 keyWindow 蒙版背景颜色
     static public var hudBackgroundColor: UIColor = UIColor.clear {
         didSet{
-        SwiftNotice.hudBackgroundColor = hudBackgroundColor
+        SwiftProgress.hudBackgroundColor = hudBackgroundColor
         }
     }
     
-    /// 动画图片数组
-    @discardableResult public class func showPleaseWaitWithImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
-        return SwiftNotice.wait(imageNames, timeInterval: timeInterval)
-    }
-    
-    /// 顶部提示
-    @discardableResult public class func showTop(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1) -> UIWindow{
-        return SwiftNotice.noticeOnStatusBar(text, autoClear: autoClear, autoClearTime: autoClearTime)
+    /// 等待加载...
+    @discardableResult
+    public class func showWait() -> UIWindow{
+        return SwiftProgress.wait()
     }
     
     /// 成功
-    @discardableResult public class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftNotice.showNoticeWithText(NoticeType.success, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    @discardableResult
+    public class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.success, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 错误
-    @discardableResult public class func showError(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftNotice.showNoticeWithText(NoticeType.error, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    @discardableResult
+    public class func showFail(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.fail, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 提示信息
-    @discardableResult public class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftNotice.showNoticeWithText(NoticeType.info, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    @discardableResult
+    public class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
+        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.info, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
-    /// 提示
-    @discardableResult public class func show(_ text: String, type: NoticeType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftNotice.showNoticeWithText(type, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
-    }
-    
-    /// 等待
-    @discardableResult public class func showPleaseWait() -> UIWindow{
-        return SwiftNotice.wait()
+    /// 提示自由类型(一般不用)
+    @discardableResult
+    public class func show(_ text: String, type: SwiftProgressHUDType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow{
+        return SwiftProgress.showNoticeWithText(type, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
     }
     
     /// 只显示文字
-    @discardableResult public class func showOnlyText(_ text: String) -> UIWindow{
-        return SwiftNotice.showText(text)
+    @discardableResult
+    public class func showOnlyText(_ text: String) -> UIWindow{
+        return SwiftProgress.showText(text)
     }
     
+    /// 状态栏提示
+    @discardableResult
+    public class func showOnStatusBar(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1, textColor: UIColor = UIColor.black, backgroundColor: UIColor = UIColor.white) -> UIWindow{
+        return SwiftProgress.noticeOnStatusBar(text, autoClear: autoClear, autoClearTime: autoClearTime, textColor: textColor, backgroundColor: backgroundColor)
+    }
+    
+    /// 动画图片数组
+    @discardableResult
+    public class func showAnimationImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
+        return SwiftProgress.wait(imageNames, timeInterval: timeInterval)
+    }
+
     /// 清除所有
     public class func hideAllHUD() {
-        SwiftNotice.clear()
+        SwiftProgress.clear()
     }
 }
+//------------------------------------ API END -----------------------------------------
 
-class SwiftNotice: NSObject {
+
+class SwiftProgress: NSObject {
     
     static var hudBackgroundColor: UIColor = UIColor.clear
     static var windows = Array<UIWindow!>()
@@ -78,16 +91,13 @@ class SwiftNotice: NSObject {
     static var timer: DispatchSource!
     static var timerTimes = 0
     
-    /* just for iOS 8
-     */
+    /* just for iOS 8 */
     static var degree: Double {
         get {
             return [0, 0, 180, 270, 90][UIApplication.shared.statusBarOrientation.hashValue] as Double
         }
     }
     
-    // fix https://github.com/johnlui/SwiftNotice/issues/2
-    // thanks broccolii(https://github.com/broccolii) and his PR https://github.com/johnlui/SwiftNotice/pull/5
     static func clear() {
         self.cancelPreviousPerformRequests(withTarget: self)
         if let _ = timer {
@@ -99,17 +109,16 @@ class SwiftNotice: NSObject {
     }
     
     @discardableResult
-    static func noticeOnStatusBar(_ text: String, autoClear: Bool, autoClearTime: Int) -> UIWindow{
+    static func noticeOnStatusBar(_ text: String, autoClear: Bool, autoClearTime: Int, textColor: UIColor, backgroundColor: UIColor) -> UIWindow{
         let frame = UIApplication.shared.statusBarFrame
         let window = UIWindow()
         window.backgroundColor = UIColor.clear
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0x6a/0x100, green: 0xb4/0x100, blue: 0x9f/0x100, alpha: 1)
-        
+        view.backgroundColor = backgroundColor
         let label = UILabel(frame: frame)
         label.textAlignment = NSTextAlignment.center
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.white
+        label.textColor = textColor
         label.text = text
         view.addSubview(label)
         
@@ -139,14 +148,14 @@ class SwiftNotice: NSObject {
         var origPoint = view.frame.origin
         origPoint.y = -(view.frame.size.height)
         let destPoint = view.frame.origin
-        view.tag = sn_topBar
+        view.tag = yj_topBarTag
         
         view.frame = CGRect(origin: origPoint, size: view.frame.size)
         UIView.animate(withDuration: 0.3, animations: {
             view.frame = CGRect(origin: destPoint, size: view.frame.size)
         }, completion: { b in
             if autoClear {
-                let selector = #selector(SwiftNotice.hideNotice(_:))
+                let selector = #selector(SwiftProgress.hideNotice(_:))
                 self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
             }
         })
@@ -209,7 +218,7 @@ class SwiftNotice: NSObject {
     }
     
     @discardableResult
-    static func showText(_ text: String, autoClear: Bool=true, autoClearTime: Int=2) -> UIWindow {
+    static func showText(_ text: String, autoClear: Bool=true, autoClearTime: Int = 2) -> UIWindow {
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
@@ -248,14 +257,14 @@ class SwiftNotice: NSObject {
         windows.append(window)
         
         if autoClear {
-            let selector = #selector(SwiftNotice.hideNotice(_:))
+            let selector = #selector(SwiftProgress.hideNotice(_:))
             self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
         }
         return window
     }
     
     @discardableResult
-    static func showNoticeWithText(_ type: NoticeType,text: String, autoClear: Bool, autoClearTime: Int) -> UIWindow {
+    static func showNoticeWithText(_ type: SwiftProgressHUDType,text: String, autoClear: Bool, autoClearTime: Int) -> UIWindow {
         let frame = CGRect(x: 0, y: 0, width: 90, height: 90)
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
@@ -266,11 +275,11 @@ class SwiftNotice: NSObject {
         var image = UIImage()
         switch type {
         case .success:
-            image = SwiftNoticeSDK.imageOfCheckmark
-        case .error:
-            image = SwiftNoticeSDK.imageOfCross
+            image = SwiftProgressSDK.imageOfCheckmark
+        case .fail:
+            image = SwiftProgressSDK.imageOfCross
         case .info:
-            image = SwiftNoticeSDK.imageOfInfo
+            image = SwiftProgressSDK.imageOfInfo
         }
         let checkmarkView = UIImageView(image: image)
         checkmarkView.frame = CGRect(x: 27, y: 15, width: 36, height: 36)
@@ -307,25 +316,24 @@ class SwiftNotice: NSObject {
         })
         
         if autoClear {
-            let selector = #selector(SwiftNotice.hideNotice(_:))
+            let selector = #selector(SwiftProgress.hideNotice(_:))
             self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
         }
         return window
     }
     
-    // fix https://github.com/johnlui/SwiftNotice/issues/2
+    /// 修复 window 没有移除
     static func hideNotice(_ sender: AnyObject) {
         if let window = sender as? UIWindow {
             
             if let v = window.subviews.first {
                 UIView.animate(withDuration: 0.2, animations: {
                     
-                    if v.tag == sn_topBar {
+                    if v.tag == yj_topBarTag {
                         v.frame = CGRect(x: 0, y: -v.frame.height, width: v.frame.width, height: v.frame.height)
                     }
                     v.alpha = 0
                 }, completion: { b in
-                    
                     if let index = windows.index(where: { (item) -> Bool in
                         return item == window
                     }) {
@@ -333,7 +341,6 @@ class SwiftNotice: NSObject {
                     }
                 })
             }
-            
         }
     }
     
@@ -347,13 +354,13 @@ class SwiftNotice: NSObject {
     }
 }
 
-class SwiftNoticeSDK {
+class SwiftProgressSDK {
     struct Cache {
         static var imageOfCheckmark: UIImage?
         static var imageOfCross: UIImage?
         static var imageOfInfo: UIImage?
     }
-    class func draw(_ type: NoticeType) {
+    class func draw(_ type: SwiftProgressHUDType) {
         let checkmarkShapePath = UIBezierPath()
         
         // draw circle
@@ -368,7 +375,7 @@ class SwiftNoticeSDK {
             checkmarkShapePath.addLine(to: CGPoint(x: 27, y: 13))
             checkmarkShapePath.move(to: CGPoint(x: 10, y: 18))
             checkmarkShapePath.close()
-        case .error: // draw X
+        case .fail: // draw X
             checkmarkShapePath.move(to: CGPoint(x: 10, y: 10))
             checkmarkShapePath.addLine(to: CGPoint(x: 26, y: 26))
             checkmarkShapePath.move(to: CGPoint(x: 10, y: 26))
@@ -402,7 +409,7 @@ class SwiftNoticeSDK {
         }
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 36, height: 36), false, 0)
         
-        SwiftNoticeSDK.draw(NoticeType.success)
+        SwiftProgressSDK.draw(SwiftProgressHUDType.success)
         
         Cache.imageOfCheckmark = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -414,7 +421,7 @@ class SwiftNoticeSDK {
         }
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 36, height: 36), false, 0)
         
-        SwiftNoticeSDK.draw(NoticeType.error)
+        SwiftProgressSDK.draw(SwiftProgressHUDType.fail)
         
         Cache.imageOfCross = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -426,7 +433,7 @@ class SwiftNoticeSDK {
         }
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 36, height: 36), false, 0)
         
-        SwiftNoticeSDK.draw(NoticeType.info)
+        SwiftProgressSDK.draw(SwiftProgressHUDType.info)
         
         Cache.imageOfInfo = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -436,6 +443,6 @@ class SwiftNoticeSDK {
 
 extension UIWindow{
     func hide(){
-        SwiftNotice.hideNotice(self)
+        SwiftProgress.hideNotice(self)
     }
 }
