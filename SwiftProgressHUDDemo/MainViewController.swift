@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         _setUpShowDifferenceMainView()
+        
+        SwiftProgressHUD.showWait()
     }
 
     override func didReceiveMemoryWarning() {
