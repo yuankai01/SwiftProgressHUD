@@ -34,7 +34,6 @@ You will need the latest developer tools in order to build `SwiftProgressHUD`. O
 
 在需要等待的时候, 可以使用 showWait, 代码及效果如下:
 
-`
 ```swift
 /// 设置蒙版背景颜色, 默认是clear
 //            SwiftProgressHUD.hudBackgroundColor = UIColor.black.withAlphaComponent(0.2)
@@ -47,12 +46,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/wait.gif =100x59)
 
 加载成功时, 提示可以使用 `showSuccess`, 代码及效果如下:
 
-`
 ```swift
 SwiftProgressHUD.showSuccess("加载成功")
 
@@ -61,12 +59,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/success.gif =100x59)
 
 加载失败时, 提示可以使用 `showFail`, 代码及效果如下:
 
-`
 ```swift
 SwiftProgressHUD.showFail("加载失败")
 
@@ -75,12 +72,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/fail.gif =100x59)
 
 友情提示信息, 可以使用 `showInfo`, 代码及效果如下:
 
-`
 ```swift
 SwiftProgressHUD.showInfo("请稍后")
 
@@ -89,12 +85,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/info.gif =100x59)
 
 错误Toast提示信息, 可以使用 `showOnlyText`, 代码及效果如下:
 
-`
 ```swift
 SwiftProgressHUD.showOnlyText("请输入合法的手机号")
 
@@ -103,12 +98,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/text.gif =100x59)
 
 状态栏提示信息, 可以使用 `showOnStatusBar`, 代码及效果如下:
 
-`
 ```swift
 SwiftProgressHUD.showOnStatusBar("你有一条新消息", autoClear: true, autoClearTime: 1, textColor: UIColor.orange, backgroundColor: UIColor.lightGray)
 
@@ -118,12 +112,11 @@ SwiftProgressHUD.hideAllHUD()
 }
 
 ```
-`
+
 ![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/status.gif =100x59)
 
 加载动画提示, 可以使用 `showAnimationImages`, 代码及效果如下:
 
-`
 ```swift
 let animationDuration = 70 // 动画时间 单位毫秒Int
 
@@ -142,9 +135,9 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
 SwiftProgressHUD.hideAllHUD()
 }
 ```
-`
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/clearAnimation.gif =100x59)
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/bgAnimation.gif =1100x59)
+
+[![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/clearAnimation.gif =100x59)]
+[![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/bgAnimation.gif =1100x59)]
 
 ## License
 
