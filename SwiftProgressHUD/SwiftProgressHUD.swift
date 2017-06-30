@@ -30,50 +30,74 @@ public class SwiftProgressHUD {
     
     /// 等待加载...
     @discardableResult
-    public class func showWait() -> UIWindow{
-        return SwiftProgress.wait()
+    public class func showWait() -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.wait()
+        }
+        return nil
     }
     
     /// 成功
     @discardableResult
-    public class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.success, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    public class func showSuccess(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.success, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+        }
+        return nil
     }
     
     /// 错误
     @discardableResult
-    public class func showFail(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.fail, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    public class func showFail(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.fail, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+        }
+        return nil
     }
     
     /// 提示信息
     @discardableResult
-    public class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.info, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    public class func showInfo(_ text: String, autoClear: Bool = false, autoClearTime: Int = 3) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.showNoticeWithText(SwiftProgressHUDType.info, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+        }
+        return nil
     }
     
     /// 提示自由类型(一般不用)
     @discardableResult
-    public class func show(_ text: String, type: SwiftProgressHUDType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow{
-        return SwiftProgress.showNoticeWithText(type, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+    public class func show(_ text: String, type: SwiftProgressHUDType, autoClear: Bool, autoClearTime: Int = 3) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.showNoticeWithText(type, text: text, autoClear: autoClear, autoClearTime: autoClearTime)
+        }
+        return nil
     }
     
     /// 只显示文字
     @discardableResult
-    public class func showOnlyText(_ text: String) -> UIWindow{
-        return SwiftProgress.showText(text)
+    public class func showOnlyText(_ text: String) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.showText(text)
+        }
+        return nil
     }
     
     /// 状态栏提示
     @discardableResult
-    public class func showOnStatusBar(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1, textColor: UIColor = UIColor.black, backgroundColor: UIColor = UIColor.white) -> UIWindow{
-        return SwiftProgress.noticeOnStatusBar(text, autoClear: autoClear, autoClearTime: autoClearTime, textColor: textColor, backgroundColor: backgroundColor)
+    public class func showOnStatusBar(_ text: String, autoClear: Bool = true, autoClearTime: Int = 1, textColor: UIColor = UIColor.black, backgroundColor: UIColor = UIColor.white) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.noticeOnStatusBar(text, autoClear: autoClear, autoClearTime: autoClearTime, textColor: textColor, backgroundColor: backgroundColor)
+        }
+        return nil
     }
     
     /// 动画图片数组
     @discardableResult
-    public class func showAnimationImages(_ imageNames: Array<UIImage>, timeMilliseconds: Int, backgroundColor: UIColor = UIColor.clear, scale: Double = 1.0) -> UIWindow{
-        return SwiftProgress.wait(imageNames, timeMilliseconds: timeMilliseconds, backgroundColor: backgroundColor, scale: scale)
+    public class func showAnimationImages(_ imageNames: Array<UIImage>, timeMilliseconds: Int, backgroundColor: UIColor = UIColor.clear, scale: Double = 1.0) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return SwiftProgress.wait(imageNames, timeMilliseconds: timeMilliseconds, backgroundColor: backgroundColor, scale: scale)
+        }
+        return nil
     }
 
     /// 清除所有
