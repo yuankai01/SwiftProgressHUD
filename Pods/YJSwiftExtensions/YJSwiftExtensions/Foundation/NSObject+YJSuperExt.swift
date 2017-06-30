@@ -1,5 +1,5 @@
 //
-//  YJSwiftExtensions.swift
+//  NSObject+YJSuperExt.swift
 //  YJExtensionsGather
 //
 //  Created by YJHou on 2016/9/7.
@@ -7,3 +7,5 @@
 //
 
 import Foundation
+
+

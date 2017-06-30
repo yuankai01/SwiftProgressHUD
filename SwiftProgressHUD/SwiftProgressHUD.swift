@@ -9,6 +9,7 @@
 import UIKit
 
 private let yj_topBarTag: Int = 1001
+private let yj_showHUDBackColor = UIColor(red:0, green:0, blue:0, alpha: 0.8)
 
 /// 显示类型
 public enum SwiftProgressHUDType{
@@ -71,8 +72,8 @@ public class SwiftProgressHUD {
     
     /// 动画图片数组
     @discardableResult
-    public class func showAnimationImages(_ imageNames: Array<UIImage>, timeInterval: Int) -> UIWindow{
-        return SwiftProgress.wait(imageNames, timeInterval: timeInterval)
+    public class func showAnimationImages(_ imageNames: Array<UIImage>, timeMilliseconds: Int, backgroundColor: UIColor = UIColor.clear, scale: Double = 1.0) -> UIWindow{
+        return SwiftProgress.wait(imageNames, timeMilliseconds: timeMilliseconds, backgroundColor: backgroundColor, scale: scale)
     }
 
     /// 清除所有
@@ -155,30 +156,43 @@ class SwiftProgress: NSObject {
             view.frame = CGRect(origin: destPoint, size: view.frame.size)
         }, completion: { b in
             if autoClear {
-                let selector = #selector(SwiftProgress.hideNotice(_:))
-                self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
+                
+                DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .seconds(autoClearTime), execute: {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            /// 消失动画
+                            view.frame = CGRect(origin: origPoint, size: view.frame.size)
+                        }, completion: { (b) in
+                            let selector = #selector(SwiftProgress.hideNotice(_:))
+                            self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
+                        })
+                    }
+                })
             }
         })
         return window
     }
     
     @discardableResult
-    static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeInterval: Int = 0) -> UIWindow {
+    static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeMilliseconds: Int = 0, backgroundColor: UIColor = yj_showHUDBackColor, scale: Double = 1.0) -> UIWindow {
         let frame = CGRect(x: 0, y: 0, width: 78, height: 78)
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
-        mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.8)
+        mainView.backgroundColor = backgroundColor
+        
+        /// 计算动画的Frame
+        let imgViewFrame = CGRect(x: Double(frame.size.width) * (1 - scale) * 0.5, y: Double(frame.size.height) * (1 - scale) * 0.5, width: Double(frame.size.width) * scale, height: Double(frame.size.height) * scale)
         
         if imageNames.count > 0 {
             if imageNames.count > timerTimes {
-                let iv = UIImageView(frame: frame)
+                let iv = UIImageView(frame: imgViewFrame)
                 iv.image = imageNames.first!
                 iv.contentMode = UIViewContentMode.scaleAspectFit
                 mainView.addSubview(iv)
                 timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: DispatchQueue.main) as! DispatchSource
-                timer.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.milliseconds(timeInterval))
+                timer.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.milliseconds(timeMilliseconds))
                 timer.setEventHandler(handler: { () -> Void in
                     let name = imageNames[timerTimes % imageNames.count]
                     iv.image = name
@@ -223,7 +237,7 @@ class SwiftProgress: NSObject {
         window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
-        mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.8)
+        mainView.backgroundColor = yj_showHUDBackColor
         
         let label = UILabel()
         label.text = text
@@ -270,7 +284,7 @@ class SwiftProgress: NSObject {
         window.backgroundColor = hudBackgroundColor
         let mainView = UIView()
         mainView.layer.cornerRadius = 10
-        mainView.backgroundColor = UIColor(red:0, green:0, blue:0, alpha: 0.7)
+        mainView.backgroundColor = yj_showHUDBackColor
         
         var image = UIImage()
         switch type {

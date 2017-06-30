@@ -10,7 +10,7 @@ import UIKit
 import CommonParameter
 import YJSwiftExtensions
 
-fileprivate let btnW = 60.0, btnH = 38.0, rightMargin = 10.0, fontSize = 13.0
+fileprivate let btnW = 65.0, btnH = 38.0, rightMargin = 10.0, fontSize = 13.0
 
 class MainViewController: UIViewController {
 
@@ -29,7 +29,7 @@ extension MainViewController {
     
     func _setUpShowDifferenceMainView() -> () {
         
-        let btnVGap = (kSCREEN_HEIGHT - btnH * 7) / 8.0
+        let btnVGap = (kSCREEN_HEIGHT - btnH * 8) / 9.0
         let btnFont = UIFont.systemFont(ofSize: CGFloat(fontSize))
         let btnX = kSCREEN_WIDTH - btnW - rightMargin
         
@@ -51,12 +51,11 @@ extension MainViewController {
         let showOnStatusBarBtn = getBtn(frame: CGRect(x: btnX, y: btnVGap + (btnVGap + btnH) * 5, width: btnW, height: btnH), cornerRadius: btnH * 0.5, title: "状态栏", btnFont: btnFont, btnTag: 6)
         view.addSubview(showOnStatusBarBtn)
         
-        let showAnimationImagesBtn = getBtn(frame: CGRect(x: btnX, y: btnVGap + (btnVGap + btnH) * 6, width: btnW, height: btnH), cornerRadius: btnH * 0.5, title: "动画", btnFont: btnFont, btnTag: 7)        
-        view.addSubview(showAnimationImagesBtn)
+        let showAnimationImagesClearBtn = getBtn(frame: CGRect(x: btnX, y: btnVGap + (btnVGap + btnH) * 6, width: btnW, height: btnH), cornerRadius: btnH * 0.5, title: "透明动画", btnFont: btnFont, btnTag: 7)
+        view.addSubview(showAnimationImagesClearBtn)
         
-        /// 停止HUD
-//        let stopBtn = getBtn(frame: CGRect(x: rightMargin, y: kSCREEN_HEIGHT - btnVGap - btnH, width: btnW, height: btnH), cornerRadius: btnH * 0.5, title: "停止", btnFont: btnFont, btnTag: 8)
-//        view.addSubview(stopBtn)
+        let showAnimationImagesBgBtn = getBtn(frame: CGRect(x: btnX, y: btnVGap + (btnVGap + btnH) * 7, width: btnW, height: btnH), cornerRadius: btnH * 0.5, title: "背景动画", btnFont: btnFont, btnTag: 8)
+        view.addSubview(showAnimationImagesBgBtn)
 
     }
     
@@ -65,6 +64,10 @@ extension MainViewController {
         let btnTag = btn.tag
         if btnTag == 1 { // wait
             
+            /// 设置蒙版背景颜色, 默认是clear
+//            SwiftProgressHUD.hudBackgroundColor = UIColor.black.withAlphaComponent(0.2)
+            
+            /// 开始loading...
             SwiftProgressHUD.showWait()
             
             /// 模拟 1s后 加载完成
@@ -110,7 +113,7 @@ extension MainViewController {
         
         }else if btnTag == 6 { // showOnStatusBar
             
-            SwiftProgressHUD.showOnStatusBar("你有一条新消息")
+            SwiftProgressHUD.showOnStatusBar("你有一条新消息", autoClear: true, autoClearTime: 1, textColor: UIColor.orange, backgroundColor: UIColor.lightGray)
             
             /// 模拟 1s后 加载完成
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -119,11 +122,33 @@ extension MainViewController {
             
         }else if btnTag == 7 { // showAnimationImages
             
-        }else if btnTag == 8 { // stop
+            showAnimation(backgroundColor: UIColor.clear)
             
-            SwiftProgressHUD.hideAllHUD()
+        }else if btnTag == 8 { // 有背景动画
+            
+            showAnimation(backgroundColor: UIColor.black.withAlphaComponent(0.8), scale: 0.7)
+            
         }
 
+    }
+    
+    fileprivate func showAnimation(backgroundColor: UIColor, scale: Double = 1.0) {
+        let animationDuration = 70 // 动画时间 单位毫秒Int
+        
+        var loadingImages = [UIImage]()
+        for index in 0...16 {
+            let loadImageName = String(format: "new_brand_progress%02d", index)
+            if let loadImage = UIImage(named: loadImageName) {
+                loadingImages.append(loadImage)
+            }
+        }
+        
+        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: backgroundColor, scale: scale)
+        
+        /// 模拟 1s后 加载完成
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            SwiftProgressHUD.hideAllHUD()
+        }
     }
 }
 
@@ -135,7 +160,7 @@ extension MainViewController {
         let btn = UIButton(frame: frame)
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = btnFont
-        btn.backgroundColor = UIColor.yj_randomColor()
+        btn.setBackgroundImage(UIImage.yj_createImage(UIColor.yj_randomColor()), for: .normal)
         btn.addTarget(self, action: #selector(showBtnActionClick(btn:)), for: .touchUpInside)
         btn.tag = btnTag
         btn.layer.cornerRadius = CGFloat(cornerRadius)
@@ -143,4 +168,38 @@ extension MainViewController {
         return btn
     }
     
+    // MARK: - 状态栏的显示
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default;
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return false
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation{
+        return .none
+    }
+    
+    // MARK: - 屏幕选装
+    override var shouldAutorotate: Bool{
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return .all
+    }
+    
+    override func viewWillLayoutSubviews() {
+    }
+    
+    override func viewDidLayoutSubviews() {
+
+    }
+    
+    
 }
+
+
+
+
