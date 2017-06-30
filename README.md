@@ -50,7 +50,8 @@ SwiftProgressHUD.hideAllHUD()
 }
 ```
 
-![](https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/wait.gif)
+<img src="https://github.com/YJManager/SwiftProgressHUD/blob/master/SwiftProgressHUDDemo/Resources/AnimationGifs/wait.gif" width="59" height="100" />
+
 
 加载成功时, 提示可以使用 `showSuccess`, 代码及效果如下:
 
