@@ -113,6 +113,7 @@ class SwiftProgress: NSObject {
     static func noticeOnStatusBar(_ text: String, autoClear: Bool, autoClearTime: Int, textColor: UIColor, backgroundColor: UIColor) -> UIWindow{
         let frame = UIApplication.shared.statusBarFrame
         let window = UIWindow()
+        window.rootViewController = UIViewController()
         window.backgroundColor = UIColor.clear
         let view = UIView()
         view.backgroundColor = backgroundColor
@@ -178,6 +179,7 @@ class SwiftProgress: NSObject {
         let frame = CGRect(x: 0, y: 0, width: 78, height: 78)
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
+        window.rootViewController = UIViewController()
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = backgroundColor
@@ -235,6 +237,7 @@ class SwiftProgress: NSObject {
     static func showText(_ text: String, autoClear: Bool=true, autoClearTime: Int = 2) -> UIWindow {
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
+        window.rootViewController = UIViewController()
         let mainView = UIView()
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = yj_showHUDBackColor
@@ -282,6 +285,7 @@ class SwiftProgress: NSObject {
         let frame = CGRect(x: 0, y: 0, width: 90, height: 90)
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
+        window.rootViewController = UIViewController()
         let mainView = UIView()
         mainView.layer.cornerRadius = 10
         mainView.backgroundColor = yj_showHUDBackColor
