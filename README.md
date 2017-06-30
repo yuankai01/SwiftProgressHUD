@@ -20,17 +20,29 @@ You will need the latest developer tools in order to build `SwiftProgressHUD`. O
 [CocoaPods](http://cocoapods.org) is the recommended way to add `SwiftProgressHUD` to your project.
 
 1. Add a pod entry for `SwiftProgressHUD` to your Podfile </br>
-`pod 'SwiftProgressHUD'`
+```bash
+pod 'SwiftProgressHUD'
+```
 2. Install the pod(s) by running </br>
-`pod install`.
+```bash
+pod install
+```
 3. Include `SwiftProgressHUD` wherever you need it with </br>
-`import SwiftProgressHUD`.
+```bash
+import SwiftProgressHUD
+```
 
 ### Carthage
 
-1. Add MBProgressHUD to your Cartfile. e.g., `github "jdg/MBProgressHUD" ~> 1.0.0`
-2. Run `carthage update`
-3. Follow the rest of the [standard Carthage installation instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) to add MBProgressHUD to your project.
+1. Add SwiftProgressHUD to your Cartfile. </br>
+```bash
+github "YJManager/SwiftProgressHUD"
+```
+2. Run 
+```bash
+carthage update
+```
+3. Follow the rest of the [standard Carthage installation instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) to add SwiftProgressHUD to your project.
 
 
 ## 使用举例
