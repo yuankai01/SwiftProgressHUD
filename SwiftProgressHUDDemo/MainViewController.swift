@@ -128,7 +128,7 @@ extension MainViewController {
             
         }else if btnTag == 8 { // 有背景动画
             
-            showAnimation(backgroundColor: UIColor.black.withAlphaComponent(0.8), scale: 0.7)
+            showAnimation(backgroundColor: UIColor.black.withAlphaComponent(0.8), scale: 0.6)
             
         }
 
@@ -149,7 +149,7 @@ extension MainViewController {
         
         /// 模拟 1s后 加载完成
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            SwiftProgressHUD.hideAllHUD()
+//            SwiftProgressHUD.hideAllHUD()
         }
     }
 }

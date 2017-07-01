@@ -24,7 +24,14 @@ public class SwiftProgressHUD {
     /// 设置 keyWindow 蒙版背景颜色
     static public var hudBackgroundColor: UIColor = UIColor.clear {
         didSet{
-        SwiftProgress.hudBackgroundColor = hudBackgroundColor
+            SwiftProgress.hudBackgroundColor = hudBackgroundColor
+        }
+    }
+    
+    /// 设置手动隐藏次数
+    static public var hideHUDTaps: Int = 2 {
+        didSet{
+            SwiftProgress.hideHUDTaps = hideHUDTaps
         }
     }
     
@@ -111,6 +118,7 @@ public class SwiftProgressHUD {
 class SwiftProgress: NSObject {
     
     static var hudBackgroundColor: UIColor = UIColor.clear
+    static var hideHUDTaps: Int = 2
     static var windows = Array<UIWindow!>()
     static let rv = UIApplication.shared.keyWindow?.subviews.first as UIView!
     static var timer: DispatchSource!
@@ -208,6 +216,11 @@ class SwiftProgress: NSObject {
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = backgroundColor
         
+        /// add tapGesture
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapHideGesture(gesture:)))
+        tapGesture.numberOfTapsRequired = hideHUDTaps
+        window.addGestureRecognizer(tapGesture)
+        
         /// 计算动画的Frame
         let imgViewFrame = CGRect(x: Double(frame.size.width) * (1 - scale) * 0.5, y: Double(frame.size.height) * (1 - scale) * 0.5, width: Double(frame.size.width) * scale, height: Double(frame.size.height) * scale)
         
@@ -266,6 +279,11 @@ class SwiftProgress: NSObject {
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = yj_showHUDBackColor
         
+        /// add tapGesture
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapHideGesture(gesture:)))
+        tapGesture.numberOfTapsRequired = hideHUDTaps
+        window.addGestureRecognizer(tapGesture)
+        
         let label = UILabel()
         label.text = text
         label.numberOfLines = 0
@@ -313,6 +331,11 @@ class SwiftProgress: NSObject {
         let mainView = UIView()
         mainView.layer.cornerRadius = 10
         mainView.backgroundColor = yj_showHUDBackColor
+        
+        /// add tapGesture
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapHideGesture(gesture:)))
+        tapGesture.numberOfTapsRequired = hideHUDTaps
+        window.addGestureRecognizer(tapGesture)
         
         var image = UIImage()
         switch type {
@@ -393,6 +416,12 @@ class SwiftProgress: NSObject {
         } else {
             return rv!.center
         }
+    }
+    
+    /// tap Hide HUD
+    @objc
+    static func tapHideGesture(gesture: UITapGestureRecognizer) {
+        clear()
     }
 }
 
