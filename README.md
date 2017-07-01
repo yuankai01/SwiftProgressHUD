@@ -1,5 +1,11 @@
 # SwiftProgressHUD
 
+[![Platform](https://img.shields.io/cocoapods/p/SwiftProgressHUD.svg?style=plastic)](https://github.com/YJManager/SwiftProgressHUD.git)
+[![CocoaPods](https://img.shields.io/cocoapods/v/SwiftProgressHUD.svg?style=plastic)](https://github.com/YJManager/SwiftProgressHUD.git)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD)
+[![GitHub tag](https://img.shields.io/github/tag/YJManager/SwiftProgressHUD.svg?style=plastic)](https://github.com/YJManager/SwiftProgressHUD.git)
+[![GitHub stars](https://img.shields.io/github/stars/YJManager/SwiftProgressHUD.svg?style=social&label=Star&style=plastic)](https://github.com/YJManager/SwiftProgressHUD.git)
+
 `SwiftProgressHUD` is an iOS drop-in class that displays a translucent HUD with an indicator and/or labels while work is being done in a background thread. The HUD is meant as a replacement for the undocumented, private `UIKit` `UIProgressHUD` with some additional features.
 
 ## Requirements
