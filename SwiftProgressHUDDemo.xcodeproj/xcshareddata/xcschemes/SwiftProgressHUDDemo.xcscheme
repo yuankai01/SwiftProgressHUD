@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "639064D61F0639FB00562407"
-               BuildableName = "SwiftProgressHUD.framework"
-               BlueprintName = "SwiftProgressHUDFramework"
+               BlueprintIdentifier = "6304F8AB1EFA1016001379B1"
+               BuildableName = "SwiftProgressHUDDemo.app"
+               BlueprintName = "SwiftProgressHUDDemo"
                ReferencedContainer = "container:SwiftProgressHUDDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6304F8AB1EFA1016001379B1"
+            BuildableName = "SwiftProgressHUDDemo.app"
+            BlueprintName = "SwiftProgressHUDDemo"
+            ReferencedContainer = "container:SwiftProgressHUDDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "639064D61F0639FB00562407"
-            BuildableName = "SwiftProgressHUD.framework"
-            BlueprintName = "SwiftProgressHUDFramework"
+            BlueprintIdentifier = "6304F8AB1EFA1016001379B1"
+            BuildableName = "SwiftProgressHUDDemo.app"
+            BlueprintName = "SwiftProgressHUDDemo"
             ReferencedContainer = "container:SwiftProgressHUDDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "639064D61F0639FB00562407"
-            BuildableName = "SwiftProgressHUD.framework"
-            BlueprintName = "SwiftProgressHUDFramework"
+            BlueprintIdentifier = "6304F8AB1EFA1016001379B1"
+            BuildableName = "SwiftProgressHUDDemo.app"
+            BlueprintName = "SwiftProgressHUDDemo"
             ReferencedContainer = "container:SwiftProgressHUDDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
