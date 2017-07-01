@@ -1,26 +1,5 @@
-language: objective-c
-osx_image: xcode8.3
-xcode_sdk: iphonesimulator10.0
-env:
-global:
-- FRAMEWORK_NAME=SwiftProgressHUDFramework
-before_install:
-- rvm get head
-- brew update
-- brew outdated carthage || brew upgrade carthage
-before_deploy:
-- carthage build --no-skip-current
-- carthage archive $FRAMEWORK_NAME
-script:
-- set -o pipefail
-- travis_retry xcodebuild -workspace SwiftProgressHUDDemo.xcworkspace -scheme "SwiftProgressHUDDemo" -destination "platform=iOS Simulator,name=iPhone 6" build-for-testing test | xcpretty
-deploy:
-provider: releases
-api_key:
-secure:
-   AAAAB3NzaC1yc2EAAAADAQABAAABAQDVCN13YDXlbvAdDv2/nvCvLKFL6SA9+HOyho4yoTlluFneGWAS4/j+mKOeyins9WYpumcMJepzFaPUtXHUjmaeByt4a7OTGixO28cS96tfqX6HcBQJyLS1gXJybGz6E1o2AhSMp9mxL2yu48EocDJn7OiWUNddsw0AWBK6Ukhp08D1Xdjg6s3HYZaiKQAYC5K5cBEwWaGqex8NDh3xnJnfOXna1kxmGzI/Vy/6S/DEjwS00rCgndDl2hjx6gEWvyyZuu7LKAWcsVvkG2lK7p8tytoE5ohbTknLqvsJL7eZ3KRni12Oao6z6nl4wtkYQOWa9LIOeLz47Jj5pI7qCtfh=
-file: SwiftProgressHUD.framework.zip
-skip_cleanup: true
-on:
-repo: YJManager/SwiftProgressHUD
-tags: true
+language: objective-c #语言种类
+
+xcode_workspace: SwiftProgressHUDDemo.xcworkspace # 项目文件相对于.travis.yml文件的路径
+
+xcode_scheme: SwiftProgressHUDDemo #你需要集成测试的scheme

@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SwiftProgressHUDDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "19BC1E1D32CDC02862F1C8C4A3140C93"
+               BuildableName = "Pods_SwiftProgressHUDDemo.framework"
+               BlueprintName = "Pods-SwiftProgressHUDDemo"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
