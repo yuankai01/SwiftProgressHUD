@@ -1,5 +1,6 @@
 # SwiftProgressHUD
 
+[![Travis](https://img.shields.io/travis/YJManager/SwiftProgressHUD.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD.git)
 [![Platform](https://img.shields.io/badge/Language-Swift%203.0%2B-FF8247.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD.git)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
 [![CocoaPods](https://img.shields.io/cocoapods/v/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
