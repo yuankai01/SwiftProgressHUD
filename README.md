@@ -1,3 +1,5 @@
+![logo](https://ws4.sinaimg.cn/large/006tNc79ly1flarglh3h3j31kw09hdrv.jpg)
+
 # SwiftProgressHUD
 
 [![Travis](https://img.shields.io/travis/YJManager/SwiftProgressHUD.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD.git)
