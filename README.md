@@ -3,11 +3,11 @@
 [![Travis](https://img.shields.io/travis/YJManager/SwiftProgressHUD.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD.git)
 [![Platform](https://img.shields.io/badge/Language-Swift%203.0%2B-FF8247.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD.git)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
-[![CocoaPods](https://img.shields.io/cocoapods/v/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
+[![CocoaPods](https://img.shields.io/cocoapods/v/SwiftProgressHUD.svg)](https://github.com/stackhou/SwiftProgressHUD.git)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/YJManager/SwiftProgressHUD)
-[![GitHub tag](https://img.shields.io/github/tag/YJManager/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
-[![GitHub stars](https://img.shields.io/github/stars/YJManager/SwiftProgressHUD.svg?style=social&label=Star)](https://github.com/YJManager/SwiftProgressHUD.git)
-[![license](https://img.shields.io/github/license/YJManager/SwiftProgressHUD.svg)](https://github.com/YJManager/SwiftProgressHUD.git)
+[![GitHub tag](https://img.shields.io/github/tag/stackhou/SwiftProgressHUD.svg)](https://github.com/stackhou/SwiftProgressHUD.git)
+[![GitHub stars](https://img.shields.io/github/stars/stackhou/SwiftProgressHUD.svg?style=social&label=Star)](https://github.com/stackhou/SwiftProgressHUD.git)
+[![license](https://img.shields.io/github/license/stackhou/SwiftProgressHUD.svg)](https://github.com/stackhou/SwiftProgressHUD.git)
 
 `SwiftProgressHUD` is an iOS drop-in class that displays a translucent HUD with an indicator and/or labels while work is being done in a background thread. The HUD is meant as a replacement for the undocumented, private `UIKit` `UIProgressHUD` with some additional features.
 
@@ -45,9 +45,9 @@ import SwiftProgressHUD
 
 1. Add SwiftProgressHUD to your Cartfile. </br>
 ```bash
-github "YJManager/SwiftProgressHUD"
+github "stackhou/SwiftProgressHUD"
 ```
-2. Run 
+2. Run
 ```bash
 carthage update
 ```
@@ -167,5 +167,4 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ## Change-log
 
-A brief summary of each MBProgressHUD release can be found in the [CHANGELOG](CHANGELOG.mdown). 
-
+A brief summary of each MBProgressHUD release can be found in the [CHANGELOG](CHANGELOG.mdown).
