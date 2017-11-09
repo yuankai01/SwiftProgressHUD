@@ -1,4 +1,4 @@
-![Logo](https://ws4.sinaimg.cn/large/006tNc79ly1flarglh3h3j31kw09hdrv.jpg)
+![](https://ws1.sinaimg.cn/large/006tKfTcly1flbmfje21jj31kw09hdrv.jpg)
 
 # SwiftProgressHUD
 
