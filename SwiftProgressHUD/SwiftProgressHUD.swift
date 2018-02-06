@@ -111,6 +111,13 @@ public class SwiftProgressHUD {
     public class func hideAllHUD() {
         SwiftProgress.clear()
     }
+    
+    //加载对应时间后完成
+    public class func hideAfterDlay(time: Int) -> Void {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(time)) {
+            SwiftProgressHUD.hideAllHUD()
+        }
+    }
 }
 //------------------------------------ API END -----------------------------------------
 
